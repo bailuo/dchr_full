@@ -1,0 +1,36 @@
+{
+  "name": "flib",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "flib/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/flib",
+        "tsConfig": "flib/tsconfig.lib.json",
+        "project": "flib/package.json",
+        "entryFile": "flib/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "flib/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "flib/jest.config.ts"
+      }
+    }
+  }
+}
